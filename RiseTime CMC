@@ -1,0 +1,72 @@
+% script that compute the RISETIME
+
+KA=logspace(0,3,10);
+C=logspace(-4,4,20);
+x = [0:0.01:1]; 
+M=size(KA,2);
+N=size(C,2);
+t = [0:0.001:2];
+T=size(t,2);
+c2=C*0.5;
+int(N,T)=NaN;
+ski=zeros(M,1);
+
+for k=1:M
+   Ka=KA(k); 
+  
+   for i=1:N
+
+
+Ra=C(i);
+
+   h=strcat('logsensing_Q_Ka=',num2str(Ka,'%.5f'),'_R=',num2str(Ra,'%.5f'),'.mat');
+   
+
+load(h);
+g_end=(sol(end,:,1)); 
+CMC(k,i)=(trapz(x,g_end.*x)-0.5)/(0.5); %CMC at steady state
+
+for j=1:T
+    
+g=(sol(j,:,1));
+
+
+int(i,j,k)=(trapz(x,g.*x)-0.5)/(0.5); %CMC fot that instant and combination of C and Ka
+
+% if j>10  %from second timestep it computes velocity
+%     jj=10+j;
+%     
+% Vel(i,jj,k)=(int(j)-int(j-1))./(0.01);  %instantaneous velocity centre of mass
+ end
+
+end
+
+
+end
+%%
+mesh(C,KA,CMC)
+%% find the steady state
+
+for k=1:M
+  
+  for i=1:N
+      
+  CMC_steady=0.95*CMC(k,i); %CMC steady state with tolerance
+       
+   for j=1:T
+    
+if int(i,j,k)>  CMC_steady
+
+
+RiseTime(k,i)=j*0.001;
+
+break
+
+end
+
+ end
+
+  end
+end
+
+mesh(C,KA,(1./RiseTime))
