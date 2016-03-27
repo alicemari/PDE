@@ -45,7 +45,7 @@ end
 end
 %%
 mesh(C,KA,CMC)
-%% find the steady state
+%% find the steady state: is not right
 
 for k=1:M
   
