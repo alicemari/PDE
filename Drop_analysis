@@ -1,4 +1,5 @@
-%% C=100 mM Ka changes
+
+ %% C=100 mM Ka changes
  close all
  clear all
 %load the files containing time and centre of mass
@@ -165,7 +166,7 @@ cc=CMC(:,j);
  for j=1:length(Ka)
         
 
-h=strcat('100_ki18','_ka',num2str(Ka(j)),'_uptake.txt');
+h=strcat('10_ki18','_ka',num2str(Ka(j)),'_uptake.txt');
 
 
 P2 = dlmread(h,'\t'); %load uptake vs time
@@ -223,7 +224,7 @@ cc=CMC(:,j);
  for j=1:length(Ki)
         
 
-h=strcat('100_ki',num2str(Ki(j)),'_ka3000_uptake','.txt');
+h=strcat('10_ki',num2str(Ki(j)),'_ka3000_uptake','.txt');
 
 
 P2 = dlmread(h,'\t'); %load uptake vs time
@@ -283,7 +284,7 @@ cc=CMC(:,j);
  for j=1:length(Ka)
         
 
-h=strcat('100_ki18','_ka',num2str(Ka(j)),'_uptake.txt');
+h=strcat('1_ki18','_ka',num2str(Ka(j)),'_uptake.txt');
 
 
 P2 = dlmread(h,'\t'); %load uptake vs time
@@ -340,7 +341,7 @@ cc=CMC(:,j);
  for j=1:length(Ki)
         
 
-h=strcat('100_ki',num2str(Ki(j)),'_ka3000_uptake','.txt');
+h=strcat('1_ki',num2str(Ki(j)),'_ka3000_uptake','.txt');
 
 
 P2 = dlmread(h,'\t'); %load uptake vs time
@@ -351,4 +352,3 @@ P2(:,2)=P2(:,2)./0.9;    %in order to renormalize and have the coordinate r  of 
 up_tot(j)=sum(P2(:,2)) %total uptake after 600s
 
  end
-
